@@ -1,0 +1,37 @@
+List<List<String>> result = new ArrayList<>();
+  List<Integer> queens = new ArrayList<>(); // store (i, j) where to place queens
+  int[][] attack = new int[n][n];  // > 0 -> could be attacked
+  backtrack(0, n, queens, attack, result);
+  return result;
+}
+
+// d is the depth (here it means the current row)
+// queens stores the col of a placed queen
+private void backtrack(int d, int n, List<Integer> queens, int[][] attack, List<List<String>> result) {
+  // base case
+  if (d == n) {
+    // Init dot builder
+    StringBuilder sb = new StringBuilder();
+    for (int i = 0; i < n; ++i) sb.append(".");
+    // Set queen
+    List<String> strList = new ArrayList<>();
+    for (int row = 0; row < n; ++row) {
+      int col = queens.get(row);
+      sb.setCharAt(col, 'Q');
+      strList.add(sb.toString());
+      sb.setCharAt(col, '.');
+    }
+    result.add(strList);
+    return;
+  }
+  // backtrack
+  for (int i = 0; i < n; ++i) {
+    if (attack[d][i] == 0) {
+      // pick
+      queens.add(i);
+      updateAttack(d, i, n, attack);
+      backtrack(d + 1, n, queens, attack, result);
+      // restore
+      queens.remove(queens.size() - 1);
+      restoreAttack(d, i, n, attack);
+    }
