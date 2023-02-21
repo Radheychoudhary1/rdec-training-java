@@ -1,0 +1,77 @@
+package homeWorkrd;
+
+public class Arraycrud {
+	   int arr[];
+	    int currentSize;
+	    public Arraycrud(int n){
+	        this.arr=new int[n];
+	        this.currentSize=0;
+	    }
+	    //insert
+	    public void insert(int index,int item){
+	        if(index>currentSize){
+	            System.out.println("can't insert the given element");
+	        }
+	        for(int i=currentSize;i>index;i--){
+	            arr[i]=arr[i-1];
+
+	        }
+	        arr[index]=item;
+	        currentSize++;
+	        System.out.println("given item is added");
+	        return;
+	    }
+	   // delete
+	    public void delete(int index){
+	       if(currentSize==0){
+	          System.out.println("can't perform delete operation");
+
+	     }return;
+	      for(int i=index;i<currentSize-1;i++){
+	            arr[i]=arr[i+1];
+	            arr[currentSize-1]=0;
+	            currentSize--;
+	            System.out.println("item is deleted at"+i);
+	        }
+	    
+	    
+	    //search
+	    public void Search(int item){
+	        for(int i=0;i<=currentSize;i++){
+	            if(arr[i]==item){
+	                System.out.println("Element is at index"+i);
+	            }
+	        }
+	    }
+	    
+	    //update
+	    public void update(int index, int item){
+	        arr[index]=item;
+	    }
+	    //print
+	    public void print(){
+	        for(int i=0;i<arr.length;i++){
+	            System.out.println(arr[i]+",");
+	        }
+	        System.out.println();
+	    }
+	    
+	
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+        Arraycrud obj=new Arraycrud(8);
+        obj.insert(0,3);
+        obj.insert(1,5);
+        obj.insert(2,8);
+        obj.insert(3,4);
+        obj.insert(4,7);
+        obj.insert(5,9);
+        //obj.delete(4);
+        obj.Search(5);
+        obj.update(1,0);
+        obj.print();
+
+	}
+
+}
